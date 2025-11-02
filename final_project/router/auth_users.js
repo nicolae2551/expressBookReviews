@@ -16,13 +16,18 @@ const authenticatedUser = (username,password)=>{ //returns boolean
 //only registered users can login
 regd_users.post("/login", (req,res) => {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  return res.status(300).json({message: "You are logged in"});
 });
 
 // Add a book review
 regd_users.put("/auth/review/:isbn", (req, res) => {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  
+    let user_review = req.session.username
+    let ISBN = req.params.isbn
+    let details = req.query.review
+    let add_review = {user:user_review,review:details}
+    books[ISBN].reviews = add_review
+  return res.status(300).json({message: "Review has been added"});
 });
 
 module.exports.authenticated = regd_users;
